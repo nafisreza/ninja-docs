@@ -3,12 +3,7 @@ interface DocumentsLayoutProps {
 }
 
 const DocumentsLayout = ({ children }: DocumentsLayoutProps) => {
-  return (
-    <div>
-      Jon
-      {children}
-    </div>
-  );
+  return <div>{children}</div>;
 };
 
 export default DocumentsLayout;
