@@ -8,11 +8,21 @@ import Table from "@tiptap/extension-table";
 import TableCell from "@tiptap/extension-table-cell";
 import TableHeader from "@tiptap/extension-table-header";
 import TableRow from "@tiptap/extension-table-row";
+import Underline from "@tiptap/extension-underline";
+import Link from "@tiptap/extension-link";
+import Highlight from "@tiptap/extension-highlight";
 import Image from "@tiptap/extension-image";
 import ImageResize from "tiptap-extension-resize-image";
 
+import { useEditorStore } from "@/store/use-editor-store";
+
 const Editor = () => {
+  const { setEditor } = useEditorStore();
+
   const editor = useEditor({
+    onCreate: ({ editor }) => {
+      setEditor(editor);
+    },
     editorProps: {
       attributes: {
         style: "padding-left: 56px; padding-right: 56px;",
@@ -35,22 +45,12 @@ const Editor = () => {
       TableRow,
       TableHeader,
       TableCell,
+      Underline,
+      Link,
+      Highlight,
     ],
     content: `
-      <table>
-          <tbody>
-            <tr>
-              <th>Name</th>
-              <th colspan="3">Description</th>
-            </tr>
-            <tr>
-              <td>Cyndi Lauper</td>
-              <td>Singer</td>
-              <td>Songwriter</td>
-              <td>Actress</td>
-            </tr>
-          </tbody>
-        </table>
+        <p>Write your text here...</p>
     `,
   });
 

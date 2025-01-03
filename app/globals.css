@@ -241,4 +241,31 @@ body {
       outline: 3px solid var(--primary);
     }
   }
+
+  /* Code and preformatted text styles */
+  code {
+    background-color: var(--purple-light);
+    border-radius: 0.4rem;
+    color: var(--accent);
+    font-size: 0.85rem;
+    padding: 0.25em 0.3em;
+  }
+
+  /* Link styles */
+  a {
+    color: var(--primary);
+    cursor: pointer;
+
+    &:hover {
+      color: var(--primary-foreground);
+    }
+  }
+
+  /* Highlight styles */
+  mark {
+    background-color: #faf594;
+    border-radius: 0.4rem;
+    box-decoration-break: clone;
+    padding: 0.1rem 0.3rem;
+  }
 }

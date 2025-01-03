@@ -3,12 +3,15 @@
 import {
   BoldIcon,
   ItalicIcon,
+  LinkIcon,
   LucideIcon,
+  Redo2Icon,
   StrikethroughIcon,
   UnderlineIcon,
   Undo2Icon,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { useEditorStore } from "@/store/use-editor-store";
 
 interface ToolbarButtonProps {
   onClick: () => void;
@@ -35,6 +38,8 @@ const ToolbarButton = ({
 };
 
 const Toolbar = () => {
+  const { editor } = useEditorStore();
+
   const sections: {
     label: string;
     icon: LucideIcon;
@@ -44,27 +49,37 @@ const Toolbar = () => {
       {
         label: "Bold",
         icon: BoldIcon,
-        onClick: () => {},
+        onClick: () => editor?.chain().focus().toggleBold().run(),
       },
       {
         label: "Italic",
         icon: ItalicIcon,
-        onClick: () => {},
+        onClick: () => editor?.chain().focus().toggleItalic().run(),
       },
       {
         label: "Underline",
         icon: UnderlineIcon,
-        onClick: () => {},
+        onClick: () => editor?.chain().focus().toggleUnderline().run(),
       },
       {
         label: "Strikethrough",
         icon: StrikethroughIcon,
-        onClick: () => {},
+        onClick: () => editor?.chain().focus().toggleStrike().run(),
       },
       {
         label: "Undo",
         icon: Undo2Icon,
-        onClick: () => console.log("Undo"),
+        onClick: () => editor?.chain().focus().undo().run(),
+      },
+      {
+        label: "Redo",
+        icon: Redo2Icon,
+        onClick: () => editor?.chain().focus().redo().run(),
+      },
+      {
+        label: "Link",
+        icon: LinkIcon,
+        onClick: () => {},
       },
     ],
   ];
@@ -73,8 +88,8 @@ const Toolbar = () => {
     <div className="bg-[#F1F4F9] px-2.5 py-0.5 rounded-3xl min-h-[40px] flex items-center gap-x-0.5 overflow-x-auto">
       {sections.map((section, i) => (
         <div key={i} className="flex items-center gap-x-2">
-          {section.map(({ label, icon, onClick }, i) => (
-            <ToolbarButton key={i} icon={icon} onClick={onClick} />
+          {section.map((item) => (
+            <ToolbarButton key={item.label} {...item} />
           ))}
         </div>
       ))}
